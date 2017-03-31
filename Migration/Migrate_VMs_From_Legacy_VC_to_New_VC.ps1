@@ -29,7 +29,7 @@ $ESXiLocationOldVC = “Existing_VM_Cluster”
 $ESXiLocationNewVC = “New_VM_Cluster”
 $VSwitch = "vSwitch1"
 $VDSwitch = "dvSwitch-Old”
-$NewVDSwitch =  “dvSwitch-New”
+$NewVDSwitch = “dvSwitch-New”
 
 # Log Files
 $FailLog = “C:\VMs_Failed_to_ping.txt"
@@ -38,13 +38,13 @@ $ClusHosVMCountLog = “C:\Cluster-Host-VM-Count.txt"
 <# Function Declarations #>
 Function PrintVars() {
     
-        Write-Host -ForegroundColor Yellow "`nThe script will run automatically with the following variables: "
+    Write-Host -ForegroundColor Yellow "`nThe script will run automatically with the following variables: "
     Write-Host -ForegroundColor Green -BackgroundColor Black " 'Legacy' VCenter Host Name: '$OldVCHostName'"
-	Write-Host -ForegroundColor Green -BackgroundColor Black " 'New' VCenter Host Name: '$NewVCHostName'"
+    Write-Host -ForegroundColor Green -BackgroundColor Black " 'New' VCenter Host Name: '$NewVCHostName'"
     Write-Host -ForegroundColor Green -BackgroundColor Black "ESXi 'Swing' Host Name: '$ESXiSwingHost'"
     Write-Host -ForegroundColor Green -BackgroundColor Black "ESXi 'Receiving/Transport' Host Name: '$ESXiReceivingHost'"
-	Write-Host -ForegroundColor Green -BackgroundColor Black "Swing Host Location (Phase1): '$ESXiSwingHost' will be added to '$ESXiLocationOldVC'"
-	Write-Host -ForegroundColor Green -BackgroundColor Black "Swing Host Location (Phase2): '$ESXiSwingHost' will be added to '$ESXiLocationNewVC'"
+    Write-Host -ForegroundColor Green -BackgroundColor Black "Swing Host Location (Phase1): '$ESXiSwingHost' will be added to '$ESXiLocationOldVC'"
+    Write-Host -ForegroundColor Green -BackgroundColor Black "Swing Host Location (Phase2): '$ESXiSwingHost' will be added to '$ESXiLocationNewVC'"
     Write-Host -ForegroundColor Green -BackgroundColor Black "Local Port Group (VSS): '$VSwitch'"
     Write-Host -ForegroundColor Green -BackgroundColor Black "Distributed Port Group (DVS) on legacy VC: '$VDSwitch'`n"
     Write-Host -ForegroundColor Green -BackgroundColor Black "Distributed Port Group (DVS) on new VC: '$NewVDSwitch'`n"
@@ -141,7 +141,7 @@ Function ConnectToVC($Host_Name) {
 Function AddESXiHost ($ESXi_Host, $ESXi_Location, $VC_Host_Name) {
     
     $UserCredentials = Get-Credential -UserName root -Message "Enter the ESXi root password"
-    Add-VMHost -Name $ESXi_Host -Location $ESXi_Location -User $UserCredentials.UserName -Password $$UserCredentials.GetNetworkCredential().Password -RunAsync -force
+    Add-VMHost -Name $ESXi_Host -Location $ESXi_Location -User $UserCredentials.UserName -Password $UserCredentials.GetNetworkCredential().Password -RunAsync -force
 
     Write-Host -ForegroundColor GREEN "Adding ESXi host $ESXi_Host to $VC_Host_Name"
        
